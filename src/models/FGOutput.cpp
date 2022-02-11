@@ -42,6 +42,7 @@ INCLUDES
 #include "FGOutput.h"
 #include "input_output/FGOutputTextFile.h"
 #include "input_output/FGOutputFG.h"
+#include "input_output/FGOutputJsonSocket.h"
 #include "input_output/FGXMLFileRead.h"
 #include "input_output/FGModelLoader.h"
 
@@ -213,6 +214,8 @@ bool FGOutput::Load(int subSystems, std::string protocol, std::string type,
   } else if (type == "FLIGHTGEAR") {
     Output = new FGOutputFG(FDMExec);
     name += ":" + port + "/" + protocol;
+  } else if (type == "JSON") {
+	  Output = new FGOutputJsonSocket(FDMExec);
   } else if (type == "TERMINAL") {
     // Not done yet
   } else if (type != string("NONE")) {
